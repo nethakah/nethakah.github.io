@@ -165,7 +165,7 @@
 
         .hero-name {
             font-family: 'Outfit', sans-serif;
-            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 500;
             letter-spacing: -0.03em;
             line-height: 0.95;
@@ -381,12 +381,11 @@
     ============================================
     This is a small script that handles the dark/light mode switch.
     -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Get the toggle button element
         const themeToggle = document.querySelector('.theme-toggle');
         
         // Check if user previously selected a theme (saved in localStorage)
-        // localStorage is like a tiny database in the browser that persists
         const savedTheme = localStorage.getItem('theme');
         
         // If they previously chose light mode, apply it
@@ -395,4 +394,14 @@
         }
         
         // When the button is clicked...
-        themeToggle.addEventListener('click', () =>
+        themeToggle.addEventListener('click', () => {
+            // Toggle the 'light' class on the <html> element
+            document.documentElement.classList.toggle('light');
+            
+            // Save their preference to localStorage
+            const isLight = document.documentElement.classList.contains('light');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    </script>
+</body>
+</html>
