@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #7289DA;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: white;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tree-container {
+  width: 300px;
+  margin-bottom: 2rem;
+}
+
+.tree {
+  width: 100%;
+  height: auto;
+}
+
+.info {
+  max-width: 520px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.4rem;
+}
+
+p {
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.links {
+  margin-top: 1.5rem;
+}
+
+.links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 0.75rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}

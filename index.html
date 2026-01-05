@@ -1,197 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nethaka Haldo</title>
-
-<!-- NH FAVICON -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='55' text-anchor='middle' dominant-baseline='middle' font-family='Georgia, serif' font-size='44' font-weight='700' fill='%23ffffff'>NH</text></svg>">
-
-<style>
-:root {
-    --bg: #7289DA;
-    --text: #ffffff;
-    --muted: rgba(255,255,255,0.75);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: var(--bg);
-    font-family: Georgia, serif;
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-/* TOP LAYOUT */
-.top {
-    position: fixed;
-    top: 2rem;
-    left: 2rem;
-    right: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-/* LEFT INFO */
-.info {
-    max-width: 540px;
-}
-
-/* NAME — white */
-.name {
-    font-size: 1.6rem;
-    margin-bottom: 0.6rem;
-    color: var(--text);
-}
-
-/* BIO — muted but readable */
-.bio {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--muted);
-}
-
-.bio strong {
-    color: var(--text);
-    font-weight: 500;
-}
-
-/* LINKS — normal weight, white */
-.links {
-    margin-top: 0.75rem;
-    display: flex;
-    gap: 0.9rem;
-    font-size: 0.95rem;
-}
-
-.links a {
-    color: #fff;
-    font-weight: 400;
-    text-decoration: none;
-}
-
-.links a:hover {
-    text-decoration: underline;
-}
-
-/* SKATE BUTTON */
-.skate-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-family: Georgia, serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-/* SKATE AREA */
-.skate-area {
-    position: absolute;
-    top: 55%;
-    width: 100%;
-    height: 160px;
-    overflow: hidden;
-}
-
-/* BOARD — short & straight */
-.board {
-    position: absolute;
-    left: -120px;
-    bottom: 60px;
-    width: 110px;
-    height: 8px;
-    background: #111;
-    border-radius: 4px;
-    transform-style: preserve-3d;
-    animation: trick 4.6s linear forwards;
-}
-
-/* WHEELS — white */
-.wheel {
-    position: absolute;
-    bottom: -6px;
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    border-radius: 50%;
-}
-
-.wheel.front { left: 18px; }
-.wheel.back { right: 18px; }
-
-/* REALISTIC TRICK */
-@keyframes trick {
-    /* roll flat */
-    0% {
-        transform: translateX(0) translateY(0) rotateZ(0deg) rotateX(0deg);
-    }
-
-    /* still flat */
-    32% {
-        transform: translateX(42vw) translateY(0) rotateZ(0deg) rotateX(0deg);
-    }
-
-    /* pop */
-    38% {
-        transform: translateX(48vw) translateY(-50px) rotateZ(-7deg) rotateX(0deg);
-    }
-
-    /* kickflip */
-    55% {
-        transform: translateX(60vw) translateY(-60px) rotateZ(0deg) rotateX(360deg);
-    }
-
-    /* land */
-    70% {
-        transform: translateX(72vw) translateY(0) rotateZ(0deg) rotateX(360deg);
-    }
-
-    /* roll out */
-    100% {
-        transform: translateX(88vw) translateY(0) rotateZ(0deg) rotateX(360deg);
-    }
-}
-</style>
+  <meta charset="UTF-8" />
+  <title>Nethaka Haldo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
+  <main class="container">
+    <!-- Tree -->
+    <div class="tree-container">
+      <svg viewBox="0 0 400 600" class="tree">
+        <!-- Trunk -->
+        <path
+          d="M190 600 C170 450, 170 300, 200 200
+             C230 300, 230 450, 210 600 Z"
+          fill="#6b4f2a"
+        />
 
-<div class="top">
-    <div class="info">
-        <div class="name">Nethaka Haldo</div>
-        <div class="bio">
-            I’m an undergraduate 
-            <strong>Electrical &amp; Computer Engineering</strong> student at
-            <strong>Carnegie Mellon University</strong>.
-            I’m interested in helping people through advancing AI, hardware, and software. For pastime, I like playing cello and skateboarding.
-        </div>
-        <div class="links">
-            <a href="mailto:nethaka.haldo@gmail.com">[Email]</a>
-            <a href="https://linkedin.com/in/nethaka" target="_blank">[LinkedIn]</a>
-            <a href="https://github.com/nethakah" target="_blank">[GitHub]</a>
-        </div>
+        <!-- Branches -->
+        <path
+          d="M200 260
+             C120 220, 90 180, 70 150
+             M200 260
+             C280 220, 310 180, 330 150"
+          stroke="#6b4f2a"
+          stroke-width="14"
+          fill="none"
+          stroke-linecap="round"
+        />
+
+        <!-- Bodhi Leaves -->
+        <g fill="#9be28c">
+          <path d="M200 120 C180 90, 140 90, 140 140 C140 180, 200 220, 200 260 C200 220, 260 180, 260 140 C260 90, 220 90, 200 120 Z"/>
+          <path d="M120 160 C105 135, 80 135, 80 160 C80 190, 120 220, 120 250 C120 220, 160 190, 160 160 C160 135, 135 135, 120 160 Z"/>
+          <path d="M280 160 C265 135, 240 135, 240 160 C240 190, 280 220, 280 250 C280 220, 320 190, 320 160 C320 135, 295 135, 280 160 Z"/>
+        </g>
+      </svg>
     </div>
-</div>
 
-<div class="skate-area">
-    <div class="board" id="board">
-        <div class="wheel front"></div>
-        <div class="wheel back"></div>
-    </div>
-</div>
+    <!-- Text -->
+    <section class="info">
+      <h1>Nethaka Haldo</h1>
+      <p>
+        I’m an undergraduate electrical and computer engineering student at
+        Carnegie Mellon. I’m interested in AI, hardware, software, and
+        skateboarding.
+      </p>
 
-<script>
-const board = document.getElementById("board");
-</script>
-
+      <div class="links">
+        <a href="https://github.com/nethakah" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/nethaka" target="_blank">LinkedIn</a>
+        <a href="mailto:nethaka.haldo@gmail.com">Email</a>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
