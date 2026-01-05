@@ -1,60 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <title>Nethaka Haldo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="stylesheet" href="global.css">
+
+  <!-- p5 -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+  <script src="seasons.js"></script>
+
+  <base target="_blank">
 </head>
+
 <body>
-  <main class="container">
-    <!-- Tree -->
-    <div class="tree-container">
-      <svg viewBox="0 0 400 600" class="tree">
-        <!-- Trunk -->
-        <path
-          d="M190 600 C170 450, 170 300, 200 200
-             C230 300, 230 450, 210 600 Z"
-          fill="#6b4f2a"
-        />
-
-        <!-- Branches -->
-        <path
-          d="M200 260
-             C120 220, 90 180, 70 150
-             M200 260
-             C280 220, 310 180, 330 150"
-          stroke="#6b4f2a"
-          stroke-width="14"
-          fill="none"
-          stroke-linecap="round"
-        />
-
-        <!-- Bodhi Leaves -->
-        <g fill="#9be28c">
-          <path d="M200 120 C180 90, 140 90, 140 140 C140 180, 200 220, 200 260 C200 220, 260 180, 260 140 C260 90, 220 90, 200 120 Z"/>
-          <path d="M120 160 C105 135, 80 135, 80 160 C80 190, 120 220, 120 250 C120 220, 160 190, 160 160 C160 135, 135 135, 120 160 Z"/>
-          <path d="M280 160 C265 135, 240 135, 240 160 C240 190, 280 220, 280 250 C280 220, 320 190, 320 160 C320 135, 295 135, 280 160 Z"/>
-        </g>
-      </svg>
-    </div>
-
-    <!-- Text -->
-    <section class="info">
-      <h1>Nethaka Haldo</h1>
-      <p>
-        I’m an undergraduate electrical and computer engineering student at
-        Carnegie Mellon. I’m interested in AI, hardware, software, and
-        skateboarding.
-      </p>
-
-      <div class="links">
-        <a href="https://github.com/nethakah" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/nethaka" target="_blank">LinkedIn</a>
-        <a href="mailto:nethaka.haldo@gmail.com">Email</a>
+  <div class="canvas-body" id="canvasContainer">
+    <div class="grid-container">
+      <div class="header">
+        <h2>Nethaka</h2>
+        <nav>
+          <a href="/index.html" target="_self" class="active">Home</a>
+        </nav>
       </div>
-    </section>
-  </main>
+
+      <div id="homepage-container">
+        <div id="homepage-grid">
+
+          <div id="trunk">
+            <p>
+              I'm an undergraduate electrical and computer engineering student at Carnegie Mellon.
+              I'm interested in AI, hardware, software, and skateboarding.
+            </p>
+          </div>
+
+          <div id="seeds">
+            <div id="links">
+              <a href="mailto:nethaka.haldo@gmail.com">[Email]</a>
+              <a href="https://github.com/nethakah">[GitHub]</a>
+              <a href="https://linkedin.com/in/nethaka">[LinkedIn]</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
