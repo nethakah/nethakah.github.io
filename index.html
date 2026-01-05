@@ -302,10 +302,11 @@
       background(114, 137, 218);
 
       let xPosition = windowWidth < 768 ? width * 0.5 : width * 0.6;
+      let treeScale = windowWidth < 768 ? 0.6 : 1;
       
       push();
       translate(xPosition, height + 15);
-      scale(1, -1);
+      scale(treeScale, -treeScale);
       translate(0, 20);
       branch(trees[0], 1, trees[0].randSeed);
       pop();
