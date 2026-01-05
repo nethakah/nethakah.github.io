@@ -1,272 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nethaka Haldo</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nethaka Haldo</title>
 
-    <!-- Favicon (unchanged) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' text-anchor='middle' dominant-baseline='central' font-family='Outfit, sans-serif' font-size='45' font-weight='500' fill='%23fafafa'>NH</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' text-anchor='middle' dominant-baseline='central' font-family='Outfit, sans-serif' font-size='45' font-weight='500' fill='%23fafafa'>NH</text></svg>">
 
-    <!-- Fonts (unchanged) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+:root {
+    --bg: #7289DA;
+    --text: #fafafa;
+    --muted: rgba(255,255,255,0.75);
+}
 
-        :root {
-            --bg: #7289DA; /* blurple */
-            --text: #fafafa;
-            --text-muted: rgba(255,255,255,0.75);
-            --border: rgba(255,255,255,0.35);
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-        /* NAV */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
+/* CENTER LAYOUT (Rowan-style) */
+.main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
 
-        .nav-left {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 500;
-            letter-spacing: -0.02em;
-        }
+/* NAME */
+.name {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+}
 
-        .nav-email {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            text-decoration: none;
-        }
+/* ABOUT */
+.about {
+    max-width: 620px;
+    font-size: 1rem;
+    color: var(--muted);
+}
 
-        .nav-email:hover {
-            color: var(--text);
-        }
+.about strong {
+    color: var(--text);
+    font-weight: 500;
+}
 
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 6rem 2rem 4rem;
-            text-align: center;
-            gap: 1.75rem;
-        }
+/* BRACKET BUTTONS */
+.buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.9rem;
+}
 
-        .hero-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            font-weight: 500;
-            letter-spacing: -0.03em;
-        }
+.buttons a,
+.buttons button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
 
-        .hero-details {
-            max-width: 640px;
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
+.buttons a:hover,
+.buttons button:hover {
+    color: var(--text);
+}
 
-        .hero-details strong {
-            color: var(--text);
-            font-weight: 500;
-        }
+/* SKATE ANIMATION */
+.skate-wrapper {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    margin-top: 1.5rem;
+}
 
-        /* BUTTON GRID */
-        .button-grid {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1.25rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+.board {
+    position: absolute;
+    left: -120px;
+    bottom: 35px;
+    width: 120px;
+    height: 12px;              /* thinner deck */
+    background: #111;
+    border-radius: 10px;
+    animation: kickflip 5.5s ease-in-out forwards;
+    transform-style: preserve-3d;
+}
 
-        .icon-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.4rem;
-            text-decoration: none;
-            color: var(--text-muted);
-        }
+.board::before,
+.board::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    width: 12px;
+    height: 12px;
+    background: #222;
+    border-radius: 50%;
+}
 
-        .icon-circle {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
+.board::before { left: 20px; }
+.board::after { right: 20px; }
 
-        .icon-circle svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
+/* REALISTIC KICKFLIP:
+   - roll
+   - ollie pop (translateY)
+   - rotateX 360 (long-axis flip)
+   - land
+*/
+@keyframes kickflip {
+    0% {
+        transform: translateX(0) translateY(0) rotateX(0deg);
+    }
+    35% {
+        transform: translateX(45vw) translateY(0) rotateX(0deg);
+    }
+    45% {
+        transform: translateX(50vw) translateY(-55px) rotateX(0deg);
+    }
+    60% {
+        transform: translateX(58vw) translateY(-55px) rotateX(360deg);
+    }
+    75% {
+        transform: translateX(65vw) translateY(0) rotateX(360deg);
+    }
+    100% {
+        transform: translateX(80vw) translateY(0) rotateX(360deg);
+    }
+}
 
-        .icon-button:hover .icon-circle {
-            color: var(--text);
-            border-color: var(--text);
-        }
-
-        .icon-label {
-            font-size: 0.75rem;
-        }
-
-        /* SKATEBOARD ANIMATION */
-        .skate-container {
-            position: relative;
-            width: 100%;
-            height: 120px;
-            margin-top: 2.5rem;
-            overflow: hidden;
-        }
-
-        .skateboard {
-            position: absolute;
-            left: -120px;
-            bottom: 40px;
-            width: 110px;
-            height: 22px;
-            background: #111;
-            border-radius: 12px;
-            animation: skate 6s ease-in-out forwards;
-        }
-
-        .skateboard::before,
-        .skateboard::after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            width: 14px;
-            height: 14px;
-            background: #222;
-            border-radius: 50%;
-        }
-
-        .skateboard::before { left: 18px; }
-        .skateboard::after { right: 18px; }
-
-        @keyframes skate {
-            0% {
-                transform: translateX(0) rotate(0deg);
-            }
-            40% {
-                transform: translateX(45vw) rotate(0deg);
-            }
-            55% {
-                transform: translateX(55vw) rotate(360deg);
-            }
-            75% {
-                transform: translateX(70vw) rotate(360deg);
-            }
-            100% {
-                transform: translateX(85vw) rotate(360deg);
-            }
-        }
-
-        /* FOOTER */
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            padding: 1.25rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-    </style>
+footer {
+    position: fixed;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+</style>
 </head>
 
 <body>
 
-<nav>
-    <div class="nav-left">NH</div>
-    <a class="nav-email" href="mailto:nethaka.haldo@gmail.com">
-        nethaka.haldo@gmail.com
-    </a>
-</nav>
+<div class="main">
+    <div class="name">Nethaka Haldo</div>
 
-<section class="hero">
-    <h1 class="hero-name">Nethaka Haldo</h1>
-
-    <p class="hero-details">
+    <div class="about">
         I’m a U.S. Citizen and undergraduate
         <strong>Electrical &amp; Computer Engineering</strong> student at
         <strong>Carnegie Mellon University</strong>.
         I’m interested in helping people through AI, hardware, software, and skateboarding.
-    </p>
-
-    <div class="button-grid">
-        <a href="https://github.com/nethakah" target="_blank" class="icon-button">
-            <div class="icon-circle">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
-            </div>
-            <div class="icon-label">GitHub</div>
-        </a>
-
-        <a href="https://linkedin.com/in/nethaka" target="_blank" class="icon-button">
-            <div class="icon-circle">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286z"/>
-                </svg>
-            </div>
-            <div class="icon-label">LinkedIn</div>
-        </a>
-
-        <button id="replay" class="icon-button" style="background:none;border:none;cursor:pointer;">
-            <div class="icon-circle">
-                🛹
-            </div>
-            <div class="icon-label">Season</div>
-        </button>
     </div>
 
-    <div class="skate-container">
-        <div id="skateboard" class="skateboard"></div>
+    <div class="buttons">
+        <a href="https://github.com/nethakah" target="_blank">[ github ]</a>
+        <a href="https://linkedin.com/in/nethaka" target="_blank">[ linkedin ]</a>
+        <a href="mailto:nethaka.haldo@gmail.com">[ email ]</a>
+        <button id="replay">[ season ]</button>
     </div>
-</section>
+
+    <div class="skate-wrapper">
+        <div id="board" class="board"></div>
+    </div>
+</div>
 
 <footer>© 2025 Nethaka Haldo</footer>
 
 <script>
-    const replay = document.getElementById('replay');
-    const board = document.getElementById('skateboard');
+const board = document.getElementById("board");
+const replay = document.getElementById("replay");
 
-    replay.addEventListener('click', () => {
-        board.style.animation = 'none';
-        board.offsetHeight; // force reflow
-        board.style.animation = 'skate 6s ease-in-out forwards';
-    });
+replay.addEventListener("click", () => {
+    board.style.animation = "none";
+    board.offsetHeight; // reflow
+    board.style.animation = "kickflip 5.5s ease-in-out forwards";
+});
 </script>
 
 </body>
