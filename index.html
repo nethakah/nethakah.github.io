@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Nethaka Haldo</title>
 
+<!-- NH FAVICON -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='55' text-anchor='middle' dominant-baseline='middle' font-family='Georgia, serif' font-size='44' font-weight='500' fill='%23ffffff'>NH</text></svg>">
+
 <style>
 :root {
     --bg: #7289DA;
-    --text: #fff;
+    --text: #ffffff;
 }
 
 * {
@@ -41,20 +44,20 @@ body {
     max-width: 540px;
 }
 
-/* NAME */
+/* NAME (smaller) */
 .name {
     font-size: 1.6rem;
     font-weight: 500;
     margin-bottom: 0.6rem;
 }
 
-/* BIO */
+/* BIO (slightly larger) */
 .bio {
     font-size: 0.95rem;
     line-height: 1.65;
 }
 
-/* LINKS */
+/* LINKS (bold & white) */
 .links {
     margin-top: 0.75rem;
     display: flex;
@@ -92,12 +95,12 @@ body {
     overflow: hidden;
 }
 
-/* BOARD — shorter & straight */
+/* BOARD (short, straight) */
 .board {
     position: absolute;
     left: -120px;
     bottom: 60px;
-    width: 110px;       /* shorter */
+    width: 110px;
     height: 8px;
     background: #111;
     border-radius: 4px;
@@ -105,7 +108,7 @@ body {
     animation: trick 4.6s linear forwards;
 }
 
-/* WHEELS */
+/* WHEELS (white) */
 .wheel {
     position: absolute;
     bottom: -6px;
@@ -118,7 +121,7 @@ body {
 .wheel.front { left: 18px; }
 .wheel.back { right: 18px; }
 
-/* PHYSICS-CORRECT TRICK */
+/* REALISTIC TRICK */
 @keyframes trick {
     /* roll flat */
     0% {
@@ -162,7 +165,7 @@ body {
             I’m a U.S. Citizen and undergraduate
             <strong>Electrical &amp; Computer Engineering</strong> student at
             <strong>Carnegie Mellon University</strong>.
-            I’m interested in helping people through AI, hardware, software, and skateboarding.
+            I’m interested in helping people through advancing AI, hardware, and software. I like skateboarding and playing cello in my free time.
         </div>
         <div class="links">
             <a href="mailto:nethaka.haldo@gmail.com">[Email]</a>
@@ -187,7 +190,7 @@ const replay = document.getElementById("replay");
 
 replay.addEventListener("click", () => {
     board.style.animation = "none";
-    board.offsetHeight;
+    board.offsetHeight; // force reflow
     board.style.animation = "trick 4.6s linear forwards";
 });
 </script>
