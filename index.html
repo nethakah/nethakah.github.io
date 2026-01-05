@@ -260,7 +260,7 @@
       createCanvas(window.innerWidth, window.innerHeight);
 
       if (windowWidth < 1200) {
-        numTrees = 5;
+        numTrees = 7;
         for(let i = 0; i < numTrees; i++){
           trees.push(new Tree({
             randBias: 5 + rand(), 
@@ -271,7 +271,7 @@
           }));
         }
       } else {
-        numTrees = 2;
+        numTrees = 8;
         for(let i = 0; i < numTrees; i++){
           trees.push(new Tree({randBias: 5 + rand()}));
         }
@@ -306,23 +306,18 @@
       background(114, 137, 218); // #7289DA
 
       if (windowWidth > 1200){
-        push();
-        translate(width * 0.70, height + 15);
-        scale(1, -1);
-        translate(0, 20);
-        branch(trees[0], 1, trees[0].randSeed);
-        pop();
-        
-        push();
-        translate(width * 0.55, height + 15);
-        scale(1, -1);
-        translate(0, 20);
-        branch(trees[1], 1, trees[1].randSeed);
-        pop();
+        for (let i = 0; i < numTrees; i++) {
+          push();
+          translate(width * 0.05 + (width * 0.9 / (numTrees - 1)) * i, height + 15);
+          scale(1, -1);
+          translate(0, 20);
+          branch(trees[i], 1, trees[i].randSeed);
+          pop();
+        }
       } else {
         for (let i = 0; i < numTrees; i++) {
           push();
-          translate(width * 0.2 + 0.15*width*i, height + 15);
+          translate(width * 0.05 + (width * 0.9 / (numTrees - 1)) * i, height + 15);
           scale(1, -1);
           translate(0, 20);
           branch(trees[i], 1, trees[i].randSeed);
@@ -352,6 +347,7 @@
       let doBranch2 = prog <= 2 ? true : rand() < tree.branchProb;
 
       let doLeaf = rand() < tree.leafProb;
+      let doSkew = rand() < 0.15;
 
       if (level < tree.maxLevel) {
         let r1 = tree.rot * (1 + rrand(tree) * tree.rotRand);
@@ -373,14 +369,14 @@
 
       // Draw bodhi leaves at branch ends
       if ((level >= tree.maxLevel || (!doBranch1 && !doBranch2)) && doLeaf) {
-        let p = Math.min(1, Math.max(0, prog - level));
-        let leafSize = tree.size / 9 * p;
-
         stroke(tree.leafColor);
         fill(tree.leafColor);
         strokeWeight(1);
 
-        // Bodhi leaf shape - pronounced heart/spade shape with elongated drip point
+        let p = Math.min(1, Math.max(0, prog - level));
+        let leafSize = tree.size / 20 * p;
+
+        // Bodhi leaf shape - heart with elongated drip point
         beginShape();
         
         // Start at the drip point (bottom)
@@ -432,7 +428,7 @@
 
         // Central vein
         stroke(tree.leafColor);
-        strokeWeight(0.5);
+        strokeWeight(0.3);
         line(0, -leafSize * 0.15, 0, leafSize * 1.2);
       }
     }
