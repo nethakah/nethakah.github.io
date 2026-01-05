@@ -3,51 +3,439 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
   <title>Nethaka Haldo</title>
-
-  <link rel="stylesheet" href="global.css">
-
-  <!-- p5 -->
+  <meta name="description" content="Nethaka Haldo - Electrical and Computer Engineering Student">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
-  <script src="seasons.js"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5em;
+    }
 
-  <base target="_blank">
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -9999;
+    }
+
+    body {
+      margin: 0;
+      overscroll-behavior-y: none;
+      font-size: 18px;
+      font-family: "Spectral", serif;
+      color: #E8E8E8;
+    }
+
+    .highlight {
+      color: #FFFFFF;
+    }
+
+    a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    a:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .grid-container {
+      width: 85%;
+      display: grid;
+      row-gap: 4em;
+      transform: scale(0.9);
+      grid-template-columns: 4ch 55ch 75ch;
+    }
+
+    .header {
+      grid-column-start: 2;
+      grid-row-start: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: -4em;
+      position: sticky;
+      top: 0;
+    }
+
+    .header h2 {
+      margin: auto 1em auto 0;
+      font-weight: normal;
+      color: #EEEEEE;
+    }
+
+    .header nav {
+      display: flex;
+      flex-direction: row;
+      gap: 2ch;
+    }
+
+    .header nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .header nav a:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    #homepage-container {
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row-start: 2;
+    }
+
+    #homepage-container h2 {
+      margin-block-start: 0;
+    }
+
+    #homepage-grid {
+      display: grid;
+      grid-template-columns: 55ch 60ch;
+      grid-template-rows: max-content;
+      grid-column-gap: 4ch;
+    }
+
+    #trunk {
+      grid-column-start: 1;
+      grid-row-start: 1;
+      text-align: justify;
+    }
+
+    #seeds {
+      grid-column-start: 1;
+      grid-row-start: 2;
+    }
+
+    #links {
+      display: flex;
+      gap: 2ch;
+    }
+
+    #seeds a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    #seeds a:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    p {
+      margin-block-start: 0;
+      line-height: 1.3em;
+    }
+
+    h1, h2 {
+      margin-bottom: 0;
+      line-height: 1.2em;
+      font-weight: normal;
+    }
+
+    h2 {
+      font-size: 1.4em;
+    }
+
+    @media only screen and (max-device-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .grid-container {
+        display: block;
+        width: auto;
+        padding: 0.5em;
+      }
+
+      #homepage-grid {
+        display: block;
+      }
+
+      .header {
+        margin-bottom: 1em;
+      }
+
+      #links {
+        font-size: 0.9em;
+      }
+    }
+  </style>
 </head>
-
 <body>
   <div class="canvas-body" id="canvasContainer">
     <div class="grid-container">
       <div class="header">
-        <h2>Nethaka</h2>
-        <nav>
-          <a href="/index.html" target="_self" class="active">Home</a>
-        </nav>
+        <h2>Nethaka Haldo</h2>
       </div>
-
       <div id="homepage-container">
-        <div id="homepage-grid">
-
-          <div id="trunk">
-            <p>
-              I'm an undergraduate electrical and computer engineering student at Carnegie Mellon.
-              I'm interested in AI, hardware, software, and skateboarding.
-            </p>
+        <div id="homepage-grid">  
+          <div id="trunk">  
+            <p>I'm an undergraduate <span class="highlight">electrical and computer engineering</span> student at <span class="highlight">Carnegie Mellon</span>. I'm interested in AI, hardware, software, and skateboarding.</p>
           </div>
-
-          <div id="seeds">
+          <div id="seeds">  
             <div id="links">
               <a href="mailto:nethaka.haldo@gmail.com">[Email]</a>
               <a href="https://github.com/nethakah">[GitHub]</a>
               <a href="https://linkedin.com/in/nethaka">[LinkedIn]</a>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    class Tree {
+      constructor(options = {}) {
+        this.season = "summer";
+        this.size = options.size || 200;
+        this.maxLevel = options.maxLevel || 11;
+        this.rot = options.rot || 0.37;
+        this.lenRand = options.lenRand || 0.8;
+        this.branchProb = options.branchProb || 0.95;
+        this.rotRand = options.rotRand || 0.2;
+        this.leafProb = options.leafProb || 0.75;
+        this.leafColor = options.leafColor || "#4CAF50";
+        this.mutating = options.hasOwnProperty('mutating') ? options.mutating : true;
+        this.randBias = options.randBias || 5;
+        this.randSeed = Math.floor(Math.random() * 1000);
+        this.paramSeed = Math.floor(Math.random() * 1000);
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+
+    function rand() {
+      return random(1000) / 1000;
+    }
+
+    function rand2() {
+      return random(2000) / 1000 - 1;
+    }
+
+    function rrand(tree) {
+      return rand2() + tree.randBias;
+    }
+
+    let prog = 1;
+    let growing = true;
+    let numTrees;
+    let trees = [];
+
+    function startGrow(tree) {
+      growing = true;
+      prog = 1;
+      grow(tree);
+    }
+
+    function grow(tree) {
+      if (prog > tree.maxLevel + 3) {
+        prog = tree.maxLevel + 3;
+        loop();
+        growing = false;
+        return;
+      }
+
+      let startTime = millis();
+      loop();
+      let diff = millis() - startTime;
+
+      prog += ((tree.maxLevel / 7.6) * Math.max(diff, 20)) / 2000;
+      setTimeout(() => grow(tree), Math.max(2, 20 - diff));
+    }
+
+    function setup() {
+      createCanvas(window.innerWidth, window.innerHeight);
+
+      if (windowWidth < 1200) {
+        numTrees = 5;
+        for(let i = 0; i < numTrees; i++){
+          trees.push(new Tree({
+            randBias: 5 + rand(), 
+            size: 100, 
+            maxLevel: 7, 
+            lenRand: 0.5, 
+            branchProb: 0.98
+          }));
+        }
+      } else {
+        numTrees = 2;
+        for(let i = 0; i < numTrees; i++){
+          trees.push(new Tree({randBias: 5 + rand()}));
+        }
+      }
+
+      for (let tree of trees){
+        mutate(tree);
+        startGrow(tree);
+      }
+    }
+
+    function mutate(tree) {
+      if (!tree.mutating) return;
+
+      let startTime = millis();
+      randomSeed(tree.paramSeed);
+
+      let n = noise(startTime / 12000) - 0.5;
+      tree.randBias = 4 * Math.abs(n) * n;
+      
+      tree.paramSeed = 1000 * random();
+      randomSeed(tree.randSeed);
+
+      let diff = millis() - startTime;
+
+      if (diff < 20) setTimeout(() => mutate(tree), 20 - diff);
+      else setTimeout(() => mutate(tree), 1);
+    }
+
+    function draw() {
+      stroke(139, 90, 60); // Brown branches
+      background(114, 137, 218); // #7289DA
+
+      if (windowWidth > 1200){
+        push();
+        translate(width * 0.70, height + 15);
+        scale(1, -1);
+        translate(0, 20);
+        branch(trees[0], 1, trees[0].randSeed);
+        pop();
+        
+        push();
+        translate(width * 0.55, height + 15);
+        scale(1, -1);
+        translate(0, 20);
+        branch(trees[1], 1, trees[1].randSeed);
+        pop();
+      } else {
+        for (let i = 0; i < numTrees; i++) {
+          push();
+          translate(width * 0.2 + 0.15*width*i, height + 15);
+          scale(1, -1);
+          translate(0, 20);
+          branch(trees[i], 1, trees[i].randSeed);
+          pop();
+        }
+      }
+    }
+
+    function branch(tree, level, seed) {
+      if (prog < level) return;
+
+      randomSeed(seed);
+
+      let seed1 = random(1000);
+      let seed2 = random(1000);
+
+      let growthLevel = prog - level > 1 || prog >= tree.maxLevel + 1 ? 1 : prog - level;
+
+      strokeWeight(12 * Math.pow((tree.maxLevel - level + 1) / tree.maxLevel, 2));
+
+      let len = growthLevel * tree.size * (1 + rand2() * tree.lenRand);
+
+      line(0, 0, 0, len / level);
+      translate(0, len / level);
+
+      let doBranch1 = prog <= 2 ? true : rand() < tree.branchProb;
+      let doBranch2 = prog <= 2 ? true : rand() < tree.branchProb;
+
+      let doLeaf = rand() < tree.leafProb;
+
+      if (level < tree.maxLevel) {
+        let r1 = tree.rot * (1 + rrand(tree) * tree.rotRand);
+        let r2 = -tree.rot * (1 - rrand(tree) * tree.rotRand);
+
+        if (doBranch1) {
+          push();
+          rotate(r1);
+          branch(tree, level + 1, seed1);
+          pop();
+        }
+        if (doBranch2) {
+          push();
+          rotate(r2);
+          branch(tree, level + 1, seed2);
+          pop();
+        }
+      }
+
+      // Draw bodhi leaves at branch ends
+      if ((level >= tree.maxLevel || (!doBranch1 && !doBranch2)) && doLeaf) {
+        let p = Math.min(1, Math.max(0, prog - level));
+        let leafSize = tree.size / 9 * p;
+
+        stroke(tree.leafColor);
+        fill(tree.leafColor);
+        strokeWeight(1);
+
+        // Bodhi leaf shape - pronounced heart/spade shape with elongated drip point
+        beginShape();
+        
+        // Start at the drip point (bottom)
+        vertex(0, leafSize * 1.3);
+        
+        // Right side of leaf - curves out to create heart lobe
+        bezierVertex(
+          leafSize * 0.35, leafSize * 0.95,
+          leafSize * 0.65, leafSize * 0.6,
+          leafSize * 0.65, leafSize * 0.3
+        );
+        
+        // Right heart lobe top
+        bezierVertex(
+          leafSize * 0.65, leafSize * 0.1,
+          leafSize * 0.5, -leafSize * 0.1,
+          leafSize * 0.25, -leafSize * 0.15
+        );
+        
+        // Center dip (heart cleft)
+        bezierVertex(
+          leafSize * 0.1, -leafSize * 0.17,
+          0, -leafSize * 0.15,
+          0, -leafSize * 0.15
+        );
+        
+        // Left side mirror
+        bezierVertex(
+          0, -leafSize * 0.15,
+          -leafSize * 0.1, -leafSize * 0.17,
+          -leafSize * 0.25, -leafSize * 0.15
+        );
+        
+        // Left heart lobe top
+        bezierVertex(
+          -leafSize * 0.5, -leafSize * 0.1,
+          -leafSize * 0.65, leafSize * 0.1,
+          -leafSize * 0.65, leafSize * 0.3
+        );
+        
+        // Left side of leaf
+        bezierVertex(
+          -leafSize * 0.65, leafSize * 0.6,
+          -leafSize * 0.35, leafSize * 0.95,
+          0, leafSize * 1.3
+        );
+        
+        endShape();
+
+        // Central vein
+        stroke(tree.leafColor);
+        strokeWeight(0.5);
+        line(0, -leafSize * 0.15, 0, leafSize * 1.2);
+      }
+    }
+  </script>
 </body>
 </html>
