@@ -5,17 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Nethaka Haldo</title>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' text-anchor='middle' dominant-baseline='central' font-family='Outfit, sans-serif' font-size='45' font-weight='500' fill='%23fafafa'>NH</text></svg>">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' text-anchor='middle' dominant-baseline='central' font-family='Georgia, serif' font-size='45' font-weight='500' fill='%23000'>NH</text></svg>">
 
 <style>
 :root {
     --bg: #7289DA;
-    --text: #fafafa;
-    --muted: rgba(255,255,255,0.75);
+    --text: #000;
+    --muted: rgba(0,0,0,0.7);
 }
 
 * {
@@ -26,165 +22,208 @@
 
 body {
     background: var(--bg);
+    font-family: Georgia, serif;
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
 }
 
-/* CENTER LAYOUT (Rowan-style) */
-.main {
-    min-height: 100vh;
+/* TOP BAR */
+.top {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    right: 2rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1.25rem;
-    text-align: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 10;
 }
 
-/* NAME */
+/* LEFT CONTENT */
+.info {
+    max-width: 520px;
+}
+
 .name {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-size: 2.75rem;
     font-weight: 500;
-    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
 }
 
-/* ABOUT */
-.about {
-    max-width: 620px;
-    font-size: 1rem;
+.bio {
+    font-size: 0.95rem;
     color: var(--muted);
+    line-height: 1.6;
 }
 
-.about strong {
+.bio strong {
     color: var(--text);
-    font-weight: 500;
 }
 
 /* BRACKET BUTTONS */
-.buttons {
+.links {
+    margin-top: 0.75rem;
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 0.75rem;
     font-size: 0.9rem;
 }
 
-.buttons a,
-.buttons button {
-    background: none;
-    border: none;
+.links a {
     color: var(--muted);
-    font-family: inherit;
-    cursor: pointer;
     text-decoration: none;
 }
 
-.buttons a:hover,
-.buttons button:hover {
+.links a:hover {
     color: var(--text);
 }
 
-/* SKATE ANIMATION */
-.skate-wrapper {
-    position: relative;
-    width: 100%;
-    height: 120px;
-    overflow: hidden;
-    margin-top: 1.5rem;
+/* SKATE BUTTON */
+.skate-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.35);
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
+.skate-btn svg {
+    width: 26px;
+    height: 26px;
+    fill: #000;
+}
+
+/* SKATE AREA */
+.skate-area {
+    position: absolute;
+    top: 55%;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+}
+
+/* BOARD */
 .board {
     position: absolute;
-    left: -120px;
-    bottom: 35px;
-    width: 120px;
-    height: 12px;              /* thinner deck */
+    left: -160px;
+    bottom: 60px;
+    width: 140px;
+    height: 10px;
     background: #111;
-    border-radius: 10px;
-    animation: kickflip 5.5s ease-in-out forwards;
+    border-radius: 4px;
     transform-style: preserve-3d;
+    animation: trick 4.8s linear forwards;
 }
 
+/* nose & tail bends */
 .board::before,
 .board::after {
     content: "";
     position: absolute;
-    bottom: -6px;
+    width: 30px;
+    height: 10px;
+    background: #111;
+}
+
+.board::before {
+    left: -18px;
+    transform: skewX(-18deg);
+    border-radius: 4px 0 0 4px;
+}
+
+.board::after {
+    right: -18px;
+    transform: skewX(18deg);
+    border-radius: 0 4px 4px 0;
+}
+
+/* WHEELS */
+.wheel {
+    position: absolute;
+    bottom: -7px;
     width: 12px;
     height: 12px;
-    background: #222;
+    background: #fff;
     border-radius: 50%;
 }
 
-.board::before { left: 20px; }
-.board::after { right: 20px; }
+.wheel.front { left: 22px; }
+.wheel.back { right: 22px; }
 
-/* REALISTIC KICKFLIP:
-   - roll
-   - ollie pop (translateY)
-   - rotateX 360 (long-axis flip)
-   - land
-*/
-@keyframes kickflip {
+/* PHYSICS-BASED TRICK */
+@keyframes trick {
+    /* roll */
     0% {
-        transform: translateX(0) translateY(0) rotateX(0deg);
+        transform: translateX(0) translateY(0) rotateZ(0deg) rotateX(0deg);
     }
-    35% {
-        transform: translateX(45vw) translateY(0) rotateX(0deg);
-    }
-    45% {
-        transform: translateX(50vw) translateY(-55px) rotateX(0deg);
-    }
-    60% {
-        transform: translateX(58vw) translateY(-55px) rotateX(360deg);
-    }
-    75% {
-        transform: translateX(65vw) translateY(0) rotateX(360deg);
-    }
-    100% {
-        transform: translateX(80vw) translateY(0) rotateX(360deg);
-    }
-}
 
-footer {
-    position: fixed;
-    bottom: 1rem;
-    width: 100%;
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--muted);
+    /* tail pop */
+    30% {
+        transform: translateX(40vw) translateY(0) rotateZ(-8deg) rotateX(0deg);
+    }
+
+    /* ollie up */
+    40% {
+        transform: translateX(48vw) translateY(-55px) rotateZ(0deg) rotateX(0deg);
+    }
+
+    /* bone out + kickflip */
+    55% {
+        transform: translateX(60vw) translateY(-65px) rotateZ(2deg) rotateX(360deg);
+    }
+
+    /* descend */
+    70% {
+        transform: translateX(72vw) translateY(0) rotateZ(0deg) rotateX(360deg);
+    }
+
+    /* roll out */
+    100% {
+        transform: translateX(88vw) translateY(0) rotateZ(0deg) rotateX(360deg);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="main">
-    <div class="name">Nethaka Haldo</div>
-
-    <div class="about">
-        I’m a U.S. Citizen and undergraduate
-        <strong>Electrical &amp; Computer Engineering</strong> student at
-        <strong>Carnegie Mellon University</strong>.
-        I’m interested in helping people through AI, hardware, software, and skateboarding.
+<div class="top">
+    <div class="info">
+        <div class="name">Nethaka Haldo</div>
+        <div class="bio">
+            I’m a U.S. Citizen and undergraduate
+            <strong>Electrical &amp; Computer Engineering</strong> student at
+            <strong>Carnegie Mellon University</strong>.
+            I’m interested in helping people through AI, hardware, software, and skateboarding.
+        </div>
+        <div class="links">
+            <a href="mailto:nethaka.haldo@gmail.com">[Email]</a>
+            <a href="https://linkedin.com/in/nethaka" target="_blank">[LinkedIn]</a>
+            <a href="https://github.com/nethakah" target="_blank">[GitHub]</a>
+        </div>
     </div>
 
-    <div class="buttons">
-        <a href="https://github.com/nethakah" target="_blank">[ github ]</a>
-        <a href="https://linkedin.com/in/nethaka" target="_blank">[ linkedin ]</a>
-        <a href="mailto:nethaka.haldo@gmail.com">[ email ]</a>
-        <button id="replay">[ season ]</button>
-    </div>
-
-    <div class="skate-wrapper">
-        <div id="board" class="board"></div>
-    </div>
+    <button class="skate-btn" id="replay" title="Replay">
+        <!-- simple skateboard icon -->
+        <svg viewBox="0 0 64 24">
+            <rect x="4" y="6" width="56" height="6" rx="3"/>
+            <circle cx="18" cy="18" r="3"/>
+            <circle cx="46" cy="18" r="3"/>
+        </svg>
+    </button>
 </div>
 
-<footer>© 2025 Nethaka Haldo</footer>
+<div class="skate-area">
+    <div class="board" id="board">
+        <div class="wheel front"></div>
+        <div class="wheel back"></div>
+    </div>
+</div>
 
 <script>
 const board = document.getElementById("board");
@@ -192,8 +231,8 @@ const replay = document.getElementById("replay");
 
 replay.addEventListener("click", () => {
     board.style.animation = "none";
-    board.offsetHeight; // reflow
-    board.style.animation = "kickflip 5.5s ease-in-out forwards";
+    board.offsetHeight;
+    board.style.animation = "trick 4.8s linear forwards";
 });
 </script>
 
