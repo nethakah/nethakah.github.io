@@ -180,8 +180,6 @@ body {
             <a href="https://github.com/nethakah" target="_blank">[GitHub]</a>
         </div>
     </div>
-
-    <button class="skate-btn" id="replay">[Skate]</button>
 </div>
 
 <div class="skate-area">
@@ -193,13 +191,6 @@ body {
 
 <script>
 const board = document.getElementById("board");
-const replay = document.getElementById("replay");
-
-replay.addEventListener("click", () => {
-    board.style.animation = "none";
-    board.offsetHeight; // force reflow
-    board.style.animation = "trick 4.6s linear forwards";
-});
 </script>
 
 </body>
