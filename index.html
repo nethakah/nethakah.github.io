@@ -12,6 +12,7 @@
 :root {
     --bg: #7289DA;
     --text: #ffffff;
+    --muted: rgba(255,255,255,0.75);
 }
 
 * {
@@ -44,20 +45,27 @@ body {
     max-width: 540px;
 }
 
-/* NAME (smaller) */
+/* NAME — slightly muted */
 .name {
     font-size: 1.6rem;
     font-weight: 500;
     margin-bottom: 0.6rem;
+    color: var(--muted);
 }
 
-/* BIO (slightly larger) */
+/* BIO — muted but readable */
 .bio {
     font-size: 0.95rem;
     line-height: 1.65;
+    color: var(--muted);
 }
 
-/* LINKS (bold & white) */
+.bio strong {
+    color: var(--text);
+    font-weight: 500;
+}
+
+/* LINKS — bold & white */
 .links {
     margin-top: 0.75rem;
     display: flex;
@@ -95,7 +103,7 @@ body {
     overflow: hidden;
 }
 
-/* BOARD (short, straight) */
+/* BOARD — short & straight */
 .board {
     position: absolute;
     left: -120px;
@@ -108,7 +116,7 @@ body {
     animation: trick 4.6s linear forwards;
 }
 
-/* WHEELS (white) */
+/* WHEELS — white */
 .wheel {
     position: absolute;
     bottom: -6px;
@@ -165,7 +173,7 @@ body {
             I’m a U.S. Citizen and undergraduate
             <strong>Electrical &amp; Computer Engineering</strong> student at
             <strong>Carnegie Mellon University</strong>.
-            I’m interested in helping people through advancing AI, hardware, and software. I like skateboarding and playing cello in my free time.
+            I’m interested in helping people through advancing AI, hardware, and software. I like playing cello and skateboarding for pastime.
         </div>
         <div class="links">
             <a href="mailto:nethaka.haldo@gmail.com">[Email]</a>
