@@ -262,12 +262,13 @@
       numTrees = 1;
       trees.push(new Tree({
         randBias: 5 + rand(),
-        size: 180,
+        size: 240,
         maxLevel: 11,
         branchProb: 0.98,
         rot: 0.4,
         rotRand: 0.25,
-        lenRand: 0.6
+        lenRand: 0.6,
+        leafProb: 0.35
       }));
 
       for (let tree of trees){
